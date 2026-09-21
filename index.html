@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adesh Rayan — Creative Strategist</title>
+<meta name="description" content="Adesh Rayan — Creative Strategist. Copy, content, creative, strategy.">
+<meta property="og:title" content="Adesh Rayan — Creative Strategist">
+<meta property="og:description" content="Copy · Content · Creative · Strategy">
+<meta property="og:type" content="website">
+
+<style>
+@font-face{font-family:"Anton";src:url("assets/fonts/anton.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Archivo Black";src:url("assets/fonts/archivo-black.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Inter";src:url("assets/fonts/inter-400.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Inter";src:url("assets/fonts/inter-600.woff2") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Caveat";src:url("assets/fonts/caveat.woff2") format("woff2");font-weight:600;font-display:swap}
+
+:root{
+  --paper:#E9E7E0; --paper2:#DEDCD4; --grey:#D5D3CC;
+  --ink:#111111; --red:#FF1E16;
+  --display:"Anton","Haettenschweiler",Impact,sans-serif;
+  --heavy:"Archivo Black","Helvetica Neue",Arial,sans-serif;
+  --meta:"Inter","Helvetica Neue",Arial,sans-serif;
+  --hand:"Caveat","Bradley Hand",cursive;
+  --gut:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--meta);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* paper grain + grid, fixed behind everything */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(17,17,17,.030) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(17,17,17,.030) 1px,transparent 1px);
+  background-size:45px 45px;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.36'/></svg>");
+  mix-blend-mode:multiply;
+}
+main{position:relative;z-index:1}
+
+/* ---------- shared ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
+.rule{height:1px;background:rgba(17,17,17,.18);margin:0}
+.eyebrow{
+  font-family:var(--meta);font-weight:600;font-size:12px;
+  letter-spacing:.28em;text-transform:uppercase;opacity:.62;
+}
+.red{color:var(--red)}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;text-transform:uppercase;letter-spacing:-.02em;line-height:.88}
+p{line-height:1.6}
+
+/* marker underline, drawn with an irregular SVG path */
+.mark{position:relative;display:inline-block;padding-bottom:.12em}
+.mark svg{position:absolute;left:-2%;bottom:-.06em;width:104%;height:.34em;overflow:visible;pointer-events:none}
+.mark svg path{fill:none;stroke:var(--red);stroke-width:11;stroke-linecap:round;vector-effect:non-scaling-stroke}
+
+/* ---------- top bar ---------- */
+.bar{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  padding:18px var(--gut);border-bottom:1px solid rgba(17,17,17,.18);
+  position:sticky;top:0;background:rgba(233,231,224,.86);
+  backdrop-filter:blur(6px);z-index:50;flex-wrap:wrap;
+}
+.bar nav{display:flex;gap:22px;flex-wrap:wrap}
+.bar a{color:inherit;text-decoration:none}
+.bar nav a:hover{color:var(--red)}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(40px,8vw,110px) 0 clamp(30px,5vw,60px)}
+.hero h1{
+  font-size:clamp(64px,15.5vw,208px);
+  margin-left:-.055em;                /* optical: pull the A to the margin */
+}
+.hero .sub{
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  margin-top:26px;padding-top:14px;border-top:2px solid var(--ink);
+}
+.hero .sub .role{font-family:var(--heavy);font-size:clamp(14px,2.4vw,22px);letter-spacing:.04em;text-transform:uppercase}
+.lede{
+  font-size:clamp(19px,2.3vw,27px);line-height:1.45;max-width:20ch;
+  margin:clamp(28px,5vw,54px) 0 0;font-weight:400;
+}
+.lede b{font-weight:600}
+
+/* ---------- reel ---------- */
+.reel{padding:clamp(40px,7vw,90px) 0}
+.reel-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(24px,5vw,64px);align-items:center}
+@media(max-width:820px){.reel-grid{grid-template-columns:1fr}}
+.screen{
+  position:relative;background:var(--ink);
+  aspect-ratio:9/16;width:100%;max-width:min(420px,100%);margin-inline:auto;
+  box-shadow:0 24px 60px rgba(20,16,12,.34);
+  transform:rotate(-1.4deg);
+}
+.screen video{width:100%;height:100%;object-fit:cover;display:block}
+.screen .tag{
+  position:absolute;top:-13px;left:-13px;background:var(--red);color:#fff;
+  font-family:var(--meta);font-weight:600;font-size:11px;letter-spacing:.2em;
+  padding:6px 11px;text-transform:uppercase;
+}
+.missing{
+  display:grid;place-items:center;height:100%;color:var(--paper);
+  font-family:var(--meta);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+  text-align:center;padding:26px;line-height:1.9;opacity:.75;
+}
+.specs{list-style:none;padding:0;margin:26px 0 0;border-top:1px solid rgba(17,17,17,.22)}
+.specs li{display:flex;justify-content:space-between;gap:18px;padding:9px 0;border-bottom:1px solid rgba(17,17,17,.13);font-size:13.5px}
+.specs span:first-child{opacity:.58;letter-spacing:.12em;text-transform:uppercase;font-size:11.5px;font-weight:600}
+
+/* ---------- work ---------- */
+.work{padding:clamp(40px,7vw,90px) 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:clamp(22px,3.4vw,44px);margin-top:44px}
+.card{background:#F6F5F1;padding:13px 13px 0;box-shadow:0 12px 30px rgba(20,16,12,.19);position:relative}
+.card:nth-child(3n+1){transform:rotate(-1.5deg)}
+.card:nth-child(3n+2){transform:rotate(1.1deg)}
+.card:nth-child(3n+3){transform:rotate(-.5deg)}
+.card:hover{transform:rotate(0) translateY(-5px);transition:transform .22s cubic-bezier(.2,.9,.3,1.3)}
+.card .shot{aspect-ratio:4/5;background:var(--grey);overflow:hidden;display:block}
+.card .shot img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9) contrast(1.06)}
+.card .ph{width:100%;height:100%;display:grid;place-items:center;color:rgba(17,17,17,.5);font-size:11px;letter-spacing:.2em;font-weight:600;
+  background-image:linear-gradient(45deg,transparent 49%,rgba(17,17,17,.2) 50%,transparent 51%),linear-gradient(-45deg,transparent 49%,rgba(17,17,17,.2) 50%,transparent 51%)}
+.card .cap{padding:13px 2px 15px}
+.card h3{font-family:var(--heavy);font-size:16px;letter-spacing:.01em;line-height:1.24;text-transform:none}
+.card .cl{font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.6;font-weight:600;margin-bottom:7px;display:block}
+.card .tags{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap}
+.card .tags i{font-style:normal;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;border:1px solid rgba(17,17,17,.3);padding:3px 7px;opacity:.72}
+.num{position:absolute;top:-16px;right:10px;font-family:var(--display);font-size:52px;color:var(--red);opacity:.9;line-height:1}
+
+/* ---------- about ---------- */
+.about{padding:clamp(40px,7vw,90px) 0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,70px)}
+@media(max-width:820px){.about-grid{grid-template-columns:1fr}}
+.about h2{font-size:clamp(38px,7.6vw,96px)}
+.about p{font-size:clamp(16px,1.75vw,20px);max-width:46ch}
+.note{font-family:var(--hand);color:var(--red);font-size:clamp(23px,3.2vw,33px);transform:rotate(-4deg);display:inline-block;margin-top:18px}
+.skills{list-style:none;padding:0;margin:26px 0 0;columns:2;gap:24px}
+.skills li{font-size:13.5px;padding:5px 0;break-inside:avoid}
+.skills li::before{content:"→";color:var(--red);margin-right:9px}
+
+/* ---------- contact ---------- */
+.contact{padding:clamp(48px,8vw,110px) 0 clamp(30px,5vw,60px)}
+.contact h2{font-size:clamp(40px,10.5vw,142px);line-height:.86}
+.ways{display:flex;gap:clamp(20px,4vw,56px);flex-wrap:wrap;margin-top:36px;padding-top:22px;border-top:2px solid var(--ink)}
+.ways a{color:inherit;text-decoration:none;display:block}
+.ways a:hover .val{color:var(--red)}
+.ways .val{font-family:var(--heavy);font-size:clamp(15px,2.1vw,23px);word-break:break-word}
+
+/* ---------- footer ---------- */
+footer{padding:26px var(--gut) 40px;border-top:1px solid rgba(17,17,17,.18);
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+
+/* reveal on scroll */
+.rv{opacity:0;transform:translateY(20px)}
+.rv.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.3,1)}
+@media(prefers-reduced-motion:reduce){.rv,.rv.in{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <a href="#top" class="eyebrow" style="letter-spacing:.2em">ADESH RAYAN</a>
+  <nav class="eyebrow">
+    <a href="#reel">Reel</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="eyebrow">Copy / Content / Creative / Strategy &nbsp;·&nbsp; Portfolio 2026</div>
+    <h1>Adesh<br>Rayan</h1>
+    <div class="sub">
+      <div class="role">Creative Strategist</div>
+      <div class="eyebrow" style="align-self:end">Hyderabad, India</div>
+    </div>
+    <p class="lede">Words that <b>do something</b>.
+      <span class="mark">Not just content<svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M4 13 C 60 6, 120 17, 180 9 S 260 12, 296 8"/></svg></span> —
+      something people actually notice.</p>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- REEL -->
+  <section class="reel wrap rv" id="reel">
+    <div class="eyebrow">01 — The Reel</div>
+    <div class="reel-grid" style="margin-top:28px">
+      <div class="screen">
+        <span class="tag">9:16 · 24fps</span>
+        <video id="v" playsinline muted loop preload="metadata" controls poster="assets/poster.jpg">
+          <source src="assets/portfolio.mp4" type="video/mp4">
+        </video>
+        <div class="missing" id="vfallback" hidden>
+          Reel not found<br><span style="opacity:.6">run tools/build.sh</span>
+        </div>
+      </div>
+      <div>
+        <h2 style="font-size:clamp(32px,5.4vw,64px)">Good ideas<br>don't sit still.</h2>
+        <p style="max-width:34ch;margin-top:18px">They move people, change conversations and occasionally
+           make someone stop scrolling.</p>
+        <ul class="specs">
+          <li><span>Format</span><span>1080 × 1920 · 9:16</span></li>
+          <li><span>Frame rate</span><span>24 fps</span></li>
+          <li><span>Duration</span><span>21 seconds</span></li>
+          <li><span>Grid</span><span>120 BPM · 12 frames/beat</span></li>
+          <li><span>Built with</span><span>Canvas · headless Chrome · ffmpeg</span></li>
+        </ul>
+        <span class="note">every frame is code.</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- WORK -->
+  <section class="work wrap rv" id="work">
+    <div class="eyebrow">02 — Selected Work</div>
+    <h2 style="font-size:clamp(38px,8vw,104px);margin-top:16px">Selected<br>work</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- ABOUT -->
+  <section class="about wrap rv" id="about">
+    <div class="eyebrow">03 — About</div>
+    <div class="about-grid" style="margin-top:24px">
+      <div>
+        <h2>Strategy,<br>with a little<br>personality.</h2>
+        <span class="note">ideas have jobs too.</span>
+      </div>
+      <div>
+        <p>I'm Adesh — a creative strategist working across copy, content and
+           campaign thinking. I spend my time turning briefs into ideas people
+           remember, and ideas into work that actually ships.</p>
+        <p>Most of what I make lives on social, where you get about a second and
+           a half to earn someone's attention. That constraint makes the writing
+           sharper, not smaller.</p>
+        <ul class="skills">
+          <li>Creative Strategy</li>
+          <li>Copywriting</li>
+          <li>Campaign Ideation</li>
+          <li>Brand Voice</li>
+          <li>Social &amp; Content</li>
+          <li>Concept Development</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="rule"></div>
+
+  <!-- CONTACT -->
+  <section class="contact wrap rv" id="contact">
+    <div class="eyebrow">04 — Contact</div>
+    <h2 style="margin-top:18px">Let's make<br>something<br><span class="mark">good.<svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M5 12 C 70 5, 140 18, 210 8 S 275 13, 295 7"/></svg></span></h2>
+    <div class="ways">
+      <a href="mailto:adeshrayanbm@gmail.com">
+        <div class="eyebrow">Email</div>
+        <div class="val">adeshrayanbm@gmail.com</div>
+      </a>
+      <a href="tel:+919573890720">
+        <div class="eyebrow">Phone</div>
+        <div class="val">+91 95738 90720</div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Adesh Rayan · Creative Strategist</span>
+  <span>Copy · Content · Creative · Strategy</span>
+  <span>Built 2026</span>
+</footer>
+
+<script>
+/* Work items. Images resolve from assets/img/; anything missing renders
+   as a clearly-marked placeholder so the grid is never broken. */
+const WORK = [
+  { t:"Food is expensive at RGIA is just a Cock and Bull story",
+    client:"Cock & Bull · GMR Hyderabad Airport", img:"ig_DMNeoSaS4D1.jpg",
+    tags:["Copy","Social","Campaign"] },
+  { t:"Another hour in traffic, or a new life in Hyderabad?",
+    client:"CREDAI Hyderabad", img:"ig_DMusFuEz6T7.jpg",
+    tags:["Copy","Real Estate","Social"] },
+  { t:"Campaign", client:"Selected work", img:"ig_DMvK5HOzs6Y.jpg", tags:["Content"] },
+  { t:"Campaign", client:"Selected work", img:"ig_DMwq7ztMHjU.jpg", tags:["Social"] },
+  { t:"Campaign", client:"Selected work", img:"ig_DMxbANiMg3D.jpg", tags:["Copy"] },
+  { t:"Campaign", client:"Selected work", img:"ig_DKJZwcRv4aD.jpg", tags:["Brand"] }
+];
+
+const grid = document.getElementById('cards');
+WORK.forEach((w, i) => {
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML = `
+    <span class="num">${String(i+1).padStart(2,'0')}</span>
+    <div class="shot"><div class="ph">Case ${String(i+1).padStart(2,'0')}</div></div>
+    <div class="cap">
+      <span class="cl">${w.client}</span>
+      <h3>${w.t}</h3>
+      <div class="tags">${w.tags.map(t=>`<i>${t}</i>`).join('')}</div>
+    </div>`;
+  const shot = el.querySelector('.shot');
+  const im = new Image();
+  im.onload  = () => { shot.innerHTML = ''; shot.appendChild(im); };
+  im.onerror = () => {};                       // keep the placeholder
+  im.alt = w.t;
+  im.src = `assets/img/${w.img}`;
+  grid.appendChild(el);
+});
+
+/* Reel: fall back gracefully if the mp4 hasn't been built yet. */
+const v = document.getElementById('v');
+v.addEventListener('error', () => {
+  v.hidden = true; document.getElementById('vfallback').hidden = false;
+}, true);
+// autoplay once in view, muted (so browsers permit it)
+new IntersectionObserver((es) => es.forEach(e => {
+  if (e.isIntersecting) v.play().catch(()=>{}); else v.pause();
+}), { threshold: .4 }).observe(v);
+
+/* Scroll reveals */
+const io = new IntersectionObserver((es) => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), { threshold: .12 });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

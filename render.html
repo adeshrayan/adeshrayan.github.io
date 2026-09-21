@@ -1,0 +1,102 @@
+<meta charset="utf-8">
+<title>render</title>
+<style>
+  @font-face { font-family:"Anton";        src:url("assets/fonts/anton.woff2")         format("woff2"); font-display:block; }
+  @font-face { font-family:"Archivo Black";src:url("assets/fonts/archivo-black.woff2") format("woff2"); font-display:block; }
+  @font-face { font-family:"Inter";        src:url("assets/fonts/inter-400.woff2")     format("woff2"); font-weight:400; font-display:block; }
+  @font-face { font-family:"Inter";        src:url("assets/fonts/inter-600.woff2")     format("woff2"); font-weight:600; font-display:block; }
+  @font-face { font-family:"Caveat";       src:url("assets/fonts/caveat.woff2")        format("woff2"); font-weight:600; font-display:block; }
+
+  html,body { margin:0; padding:0; background:#3a3a38; }
+  /* capture mode: canvas pinned at native size, nothing else visible */
+  body.capture { background:#000; }
+  body.capture #ui { display:none; }
+  body.capture #c { position:fixed; top:0; left:0; transform:none; width:1080px; height:1920px; }
+
+  #wrap { display:flex; flex-direction:column; align-items:center; gap:10px; padding:14px; }
+  #c { width:405px; height:720px; box-shadow:0 10px 40px rgba(0,0,0,.5); }
+  #ui { font:13px ui-monospace,Menlo,monospace; color:#ddd; display:flex; gap:10px; align-items:center; }
+  button { font:inherit; padding:4px 10px; cursor:pointer; }
+  input[type=range] { width:320px; }
+</style>
+
+<div id="wrap">
+  <canvas id="c" width="1080" height="1920"></canvas>
+  <div id="ui">
+    <button id="play">play</button>
+    <input type="range" id="scrub" min="0" max="503" value="0">
+    <span id="lbl">0 / 503</span>
+  </div>
+</div>
+
+<script src="src/core.js"></script>
+<script src="src/texture.js"></script>
+<script src="src/marks.js"></script>
+<script src="src/type.js"></script>
+<script src="src/content.js"></script>
+<script src="src/photo.js"></script>
+<script src="src/timeline.js"></script>
+<script>
+const cv  = document.getElementById('c');
+const ctx = cv.getContext('2d', { alpha: false });
+
+// Query params: ?frame=N renders exactly one frame then flags ready.
+const Q = new URLSearchParams(location.search);
+const CAPTURE = Q.has('capture') || Q.has('frame');
+if (CAPTURE) document.body.classList.add('capture');
+
+window.__ready = false;
+
+async function boot() {
+  await document.fonts.ready;
+  // force-load each family (fonts.ready alone can resolve before woff2 parse)
+  await Promise.all([
+    document.fonts.load('200px "Anton"'),
+    document.fonts.load('200px "Archivo Black"'),
+    document.fonts.load('400 24px "Inter"'),
+    document.fonts.load('600 24px "Inter"'),
+    document.fonts.load('600 46px "Caveat"')
+  ]);
+  await loadImages(CONTENT.images);
+  paperPlate(); grainTiles();          // bake once, up front
+
+  if (Q.has('frame')) {
+    renderFrame(ctx, parseInt(Q.get('frame'), 10) || 0);
+  } else {
+    renderFrame(ctx, 0);
+    initUI();
+  }
+  window.__ready = true;
+  document.title = 'READY';
+}
+
+/* Called by the capture driver, frame by frame. */
+window.drawFrame = function (n) {
+  renderFrame(ctx, n | 0);
+  return n;
+};
+
+function initUI() {
+  const scrub = document.getElementById('scrub');
+  const lbl = document.getElementById('lbl');
+  const btn = document.getElementById('play');
+  let playing = false, f = 0, last = 0;
+
+  scrub.addEventListener('input', () => {
+    f = +scrub.value; renderFrame(ctx, f); lbl.textContent = `${f} / ${TOTAL - 1}`;
+  });
+  btn.addEventListener('click', () => { playing = !playing; btn.textContent = playing ? 'pause' : 'play'; });
+
+  function loop(ts) {
+    if (playing && ts - last > 1000 / FPS) {
+      last = ts; f = (f + 1) % TOTAL;
+      renderFrame(ctx, f);
+      scrub.value = f; lbl.textContent = `${f} / ${TOTAL - 1}`;
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+}
+
+boot();
+</script>

@@ -1,0 +1,4 @@
+frames/
+out/
+.venv/
+.DS_Store
