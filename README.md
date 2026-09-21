@@ -61,7 +61,6 @@ src/
 tools/
   capture.py         drives headless Chrome over CDP, writes frames/f*.png
   build.sh           frames → MP4 / ProRes / GIF
-  recv.py            local receiver used when pulling assets
   fetch_ig.md        how to pull the Instagram assets
 assets/
   fonts/             Anton, Archivo Black, Inter, Caveat (vendored locally)
