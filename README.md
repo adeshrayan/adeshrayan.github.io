@@ -1,7 +1,11 @@
-# Portfolio — editorial / brutalist motion piece
+# Adesh Rayan — Creative Strategist
 
-A 9:16 vertical motion-graphics video built as a deterministic canvas
-composition and rendered frame-by-frame to MP4.
+Portfolio site + the 9:16 vertical reel it features, both built in the same
+editorial / brutalist language.
+
+- **`index.html`** — the site. Static, no build step, deploys to GitHub Pages as-is.
+- **`render.html` + `src/`** — the reel: a deterministic canvas composition
+  rendered frame-by-frame to MP4.
 
 ```
 1080 × 1920   ·   24 fps   ·   21 s   ·   504 frames   ·   120 BPM grid
@@ -30,9 +34,21 @@ lands on a beat boundary. A 120 BPM track will sync without nudging.
 
 ---
 
+## Deploying the site
+
+Push to GitHub, then **Settings → Pages → Source: `main` / root**.
+It serves as-is — no build step, no Actions, no dependencies.
+
+Everything the page needs (fonts, video, poster, imagery) is committed and
+referenced by relative path, so it works equally from `file://`, a local
+server, or Pages.
+
+---
+
 ## Layout
 
 ```
+index.html           the portfolio site
 render.html          the composition + a scrub/preview player
 src/
   core.js            timing, seeded RNG, easing, the beat grid
@@ -50,6 +66,8 @@ tools/
 assets/
   fonts/             Anton, Archivo Black, Inter, Caveat (vendored locally)
   img/               source imagery
+  portfolio.mp4      the reel, web-encoded (what the site plays)
+  poster.jpg         video poster frame
 ```
 
 **To change the words or the work, you only touch `src/content.js`.**
@@ -114,6 +132,13 @@ not colourful.
 
 ## Notes
 
+- **Outstanding:** only 1 of 18 campaign images is in `assets/img/`. Chrome
+  blocks automatic downloads from instagram.com, so the rest need that
+  permission granted first — see `tools/fetch_ig.md`. Missing images render as
+  clearly-marked placeholders, so nothing breaks in the meantime.
+- **Encoding:** the web master is CRF 26 (~9 MB). Grain is expensive to encode;
+  CRF 16 produces ~200 MB for the same 21 seconds, over GitHub's 100 MB file
+  limit, with no visible improvement. `tools/build.sh master` if you want it.
 - **Silent by design.** To add a 120 BPM track later:
   `ffmpeg -i out/portfolio_1080x1920_24fps.mp4 -i track.wav -c:v copy -shortest out/final.mp4`
 - Missing images fall back to a labelled placeholder, so the edit always renders.
