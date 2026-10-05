@@ -65,7 +65,7 @@ tools/
 assets/
   fonts/             Anton, Archivo Black, Inter, Caveat (vendored locally)
   img/               source imagery
-  portfolio.mp4      the reel, web-encoded (what the site plays)
+  portfolio.mp4      generated reel asset for standalone preview/export
   poster.jpg         video poster frame
 ```
 
